@@ -2,6 +2,7 @@
 # See LICENSE for details.
 
 import requests
+import urllib.parse
 from unidecode import unidecode
 
 from .utils.constant import COUNTRY_FILTERS, FLAG_FILTERS, PAIR_FILTERS, PRODUCT_FILTERS
@@ -154,7 +155,12 @@ def search_quotes(text, products=None, countries=None, n_results=None):
     user_limit = True if n_results is not None else False
 
     while True:
-        req = requests.post(url, headers=headers, data=params)
+        json_data = {
+            "cmd": "request.post",
+            "url": url,
+            "postData" : urllib.parse.urlencode(params)
+        }
+        req = requests.post('http://localhost:8191/v1', json=json_data)
 
         if req.status_code != 200:
             raise ConnectionError(
