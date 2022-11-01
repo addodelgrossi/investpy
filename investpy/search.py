@@ -168,7 +168,10 @@ def search_quotes(text, products=None, countries=None, n_results=None):
             )
 
         data = req.json()
-        print(data)
+        # print(data)
+        import json
+        with open('data-crypto.json', 'w') as f:
+            json.dump(data, f)        
 
         if data["total"]["quotes"] == 0:
             raise RuntimeError(
