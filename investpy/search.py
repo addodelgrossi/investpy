@@ -158,7 +158,8 @@ def search_quotes(text, products=None, countries=None, n_results=None):
         json_data = {
             "cmd": "request.post",
             "url": url,
-            "postData" : urllib.parse.urlencode(params)
+            "postData" : urllib.parse.urlencode(params),
+            "maxTimeout": 180000
         }
         req = requests.post('http://localhost:8191/v1', json=json_data)
 
