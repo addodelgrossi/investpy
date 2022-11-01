@@ -168,6 +168,7 @@ def search_quotes(text, products=None, countries=None, n_results=None):
             )
 
         data = req.json()
+        print(data)
 
         if data["total"]["quotes"] == 0:
             raise RuntimeError(
